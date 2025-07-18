@@ -1,0 +1,34 @@
+{
+  "name": "vidcallapp-payment-server",
+  "version": "1.0.0",
+  "description": "Payment server for VidCallApp with Braintree and PayPal Payouts integration",
+  "main": "braintree-paypal-server.js",
+  "scripts": {
+    "start": "node braintree-paypal-server.js",
+    "dev": "nodemon braintree-paypal-server.js",
+    "test": "node test-paypal-payouts.js",
+    "test:paypal": "node test-paypal-payouts.js"
+  },
+  "keywords": [
+    "braintree",
+    "paypal",
+    "payouts",
+    "payment",
+    "video-calling"
+  ],
+  "author": "VidCallApp Team",
+  "license": "MIT",
+  "dependencies": {
+    "@paypal/paypal-server-sdk": "^1.1.0",
+    "braintree": "^3.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

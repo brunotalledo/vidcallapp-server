@@ -2,60 +2,53 @@
 //  ContentView.swift
 //  VidCallApp
 //
-//  Created by Bruno Talledo on 4/11/25.
-//
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @EnvironmentObject var viewModel: AppViewModel
+    @StateObject private var callManager = CallManager.shared
+    @State private var isInCall = false
+    @State private var showIncomingCall = false
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        ZStack {
+            if viewModel.isLoggedIn {
+                ContactsView()
+            } else {
+                LoginView()
+            }
+
+            if showIncomingCall, let call = callManager.incomingCall {
+                IncomingCallView(
+                    callerName: call.callerName,
+                    onAccept: {
+                        isInCall = true
+                        showIncomingCall = false
+                    },
+                    onDecline: {
+                        showIncomingCall = false
+                        callManager.clearCall()
                     }
-                }
-                .onDelete(perform: deleteItems)
+                )
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+
+            if isInCall, let call = callManager.incomingCall {
+                VideoCallView(
+                    roomID: call.roomID,
+                    userID: viewModel.userProfile?.uid ?? UUID().uuidString,
+                    userName: viewModel.userProfile?.username ?? "Unknown",
+                    remoteStreamID: "stream_\(call.callerID)",
+                    onEndCall: {
+                        print("🧼 Call ended (from VideoCallView in ContentView)")
+                        isInCall = false
+                        callManager.clearCall()
                     }
+                )
+                .onDisappear {
+                    // No need to call endCall here anymore
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-}
-
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

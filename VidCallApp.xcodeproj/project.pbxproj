@@ -6,6 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EB5280542DE335E4002A07C8 /* ZegoExpressEngine in Frameworks */ = {isa = PBXBuildFile; productRef = EB5280532DE335E4002A07C8 /* ZegoExpressEngine */; };
+		EB6C6AA12DBF8533002962B1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EB6C6AA02DBF8533002962B1 /* FirebaseAuth */; };
+		EB6C6AA32DBF8533002962B1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB6C6AA22DBF8533002962B1 /* FirebaseFirestore */; };
+		EB7BFECA2E1102580035CBE8 /* BraintreeDropIn in Frameworks */ = {isa = PBXBuildFile; productRef = EB7BFEC92E1102580035CBE8 /* BraintreeDropIn */; };
+		EBC5995D2DEF0CFF002A0CBC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBC5995C2DEF0CFF002A0CBC /* FirebaseAnalytics */; };
+		EBC5995F2DEF0CFF002A0CBC /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = EBC5995E2DEF0CFF002A0CBC /* FirebaseCore */; };
+		EBC599612DEF0CFF002A0CBC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EBC599602DEF0CFF002A0CBC /* FirebaseCrashlytics */; };
+		EBC599632DEF0CFF002A0CBC /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EBC599622DEF0CFF002A0CBC /* FirebaseDatabase */; };
+		EBC599652DEF0CFF002A0CBC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EBC599642DEF0CFF002A0CBC /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EB54980D2DA9F030009802DC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +36,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EB5497FA2DA9F02E009802DC /* VidCallApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidCallApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB5497FA2DA9F02E009802DC /* Viddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB54980C2DA9F030009802DC /* VidCallAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VidCallAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB5498162DA9F030009802DC /* VidCallAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VidCallAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EB5280632DE371C4002A07C8 /* Exceptions for "VidCallApp" folder in "Viddy" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = EB5497F92DA9F02E009802DC /* Viddy */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EB5497FC2DA9F02E009802DC /* VidCallApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EB5280632DE371C4002A07C8 /* Exceptions for "VidCallApp" folder in "Viddy" target */,
+			);
 			path = VidCallApp;
 			sourceTree = "<group>";
 		};
@@ -52,6 +77,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6C6AA12DBF8533002962B1 /* FirebaseAuth in Frameworks */,
+				EB6C6AA32DBF8533002962B1 /* FirebaseFirestore in Frameworks */,
+				EBC599612DEF0CFF002A0CBC /* FirebaseCrashlytics in Frameworks */,
+				EBC599632DEF0CFF002A0CBC /* FirebaseDatabase in Frameworks */,
+				EBC599652DEF0CFF002A0CBC /* FirebaseStorage in Frameworks */,
+				EB7BFECA2E1102580035CBE8 /* BraintreeDropIn in Frameworks */,
+				EBC5995F2DEF0CFF002A0CBC /* FirebaseCore in Frameworks */,
+				EB5280542DE335E4002A07C8 /* ZegoExpressEngine in Frameworks */,
+				EBC5995D2DEF0CFF002A0CBC /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +112,7 @@
 				EB5497FC2DA9F02E009802DC /* VidCallApp */,
 				EB54980F2DA9F030009802DC /* VidCallAppTests */,
 				EB5498192DA9F030009802DC /* VidCallAppUITests */,
+				EBC599662DEF0E2F002A0CBC /* Frameworks */,
 				EB5497FB2DA9F02E009802DC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,19 +120,26 @@
 		EB5497FB2DA9F02E009802DC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EB5497FA2DA9F02E009802DC /* VidCallApp.app */,
+				EB5497FA2DA9F02E009802DC /* Viddy.app */,
 				EB54980C2DA9F030009802DC /* VidCallAppTests.xctest */,
 				EB5498162DA9F030009802DC /* VidCallAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EBC599662DEF0E2F002A0CBC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EB5497F92DA9F02E009802DC /* VidCallApp */ = {
+		EB5497F92DA9F02E009802DC /* Viddy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB5498202DA9F030009802DC /* Build configuration list for PBXNativeTarget "VidCallApp" */;
+			buildConfigurationList = EB5498202DA9F030009802DC /* Build configuration list for PBXNativeTarget "Viddy" */;
 			buildPhases = (
 				EB5497F62DA9F02E009802DC /* Sources */,
 				EB5497F72DA9F02E009802DC /* Frameworks */,
@@ -110,11 +152,20 @@
 			fileSystemSynchronizedGroups = (
 				EB5497FC2DA9F02E009802DC /* VidCallApp */,
 			);
-			name = VidCallApp;
+			name = Viddy;
 			packageProductDependencies = (
+				EB6C6AA02DBF8533002962B1 /* FirebaseAuth */,
+				EB6C6AA22DBF8533002962B1 /* FirebaseFirestore */,
+				EB5280532DE335E4002A07C8 /* ZegoExpressEngine */,
+				EBC5995C2DEF0CFF002A0CBC /* FirebaseAnalytics */,
+				EBC5995E2DEF0CFF002A0CBC /* FirebaseCore */,
+				EBC599602DEF0CFF002A0CBC /* FirebaseCrashlytics */,
+				EBC599622DEF0CFF002A0CBC /* FirebaseDatabase */,
+				EBC599642DEF0CFF002A0CBC /* FirebaseStorage */,
+				EB7BFEC92E1102580035CBE8 /* BraintreeDropIn */,
 			);
 			productName = VidCallApp;
-			productReference = EB5497FA2DA9F02E009802DC /* VidCallApp.app */;
+			productReference = EB5497FA2DA9F02E009802DC /* Viddy.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EB54980B2DA9F030009802DC /* VidCallAppTests */ = {
@@ -195,12 +246,17 @@
 			);
 			mainGroup = EB5497F12DA9F02E009802DC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				EB5280522DE335E4002A07C8 /* XCRemoteSwiftPackageReference "express-video-ios" */,
+				EB7BFEC82E1102580035CBE8 /* XCRemoteSwiftPackageReference "braintree-ios-drop-in" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EB5497FB2DA9F02E009802DC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EB5497F92DA9F02E009802DC /* VidCallApp */,
+				EB5497F92DA9F02E009802DC /* Viddy */,
 				EB54980B2DA9F030009802DC /* VidCallAppTests */,
 				EB5498152DA9F030009802DC /* VidCallAppUITests */,
 			);
@@ -258,12 +314,12 @@
 /* Begin PBXTargetDependency section */
 		EB54980E2DA9F030009802DC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EB5497F92DA9F02E009802DC /* VidCallApp */;
+			target = EB5497F92DA9F02E009802DC /* Viddy */;
 			targetProxy = EB54980D2DA9F030009802DC /* PBXContainerItemProxy */;
 		};
 		EB5498182DA9F030009802DC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EB5497F92DA9F02E009802DC /* VidCallApp */;
+			target = EB5497F92DA9F02E009802DC /* Viddy */;
 			targetProxy = EB5498172DA9F030009802DC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -393,11 +449,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VidCallApp/Preview Content\"";
+				DEVELOPMENT_TEAM = B87FXU7T49;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/VidCallApp/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -421,11 +480,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VidCallApp/Preview Content\"";
+				DEVELOPMENT_TEAM = B87FXU7T49;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/VidCallApp/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -524,7 +586,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB5498202DA9F030009802DC /* Build configuration list for PBXNativeTarget "VidCallApp" */ = {
+		EB5498202DA9F030009802DC /* Build configuration list for PBXNativeTarget "Viddy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB5498212DA9F030009802DC /* Debug */,
@@ -552,6 +614,81 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB5280522DE335E4002A07C8 /* XCRemoteSwiftPackageReference "express-video-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zegolibrary/express-video-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.20.2;
+			};
+		};
+		EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
+		EB7BFEC82E1102580035CBE8 /* XCRemoteSwiftPackageReference "braintree-ios-drop-in" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/braintree/braintree-ios-drop-in";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB5280532DE335E4002A07C8 /* ZegoExpressEngine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB5280522DE335E4002A07C8 /* XCRemoteSwiftPackageReference "express-video-ios" */;
+			productName = ZegoExpressEngine;
+		};
+		EB6C6AA02DBF8533002962B1 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		EB6C6AA22DBF8533002962B1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		EB7BFEC92E1102580035CBE8 /* BraintreeDropIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB7BFEC82E1102580035CBE8 /* XCRemoteSwiftPackageReference "braintree-ios-drop-in" */;
+			productName = BraintreeDropIn;
+		};
+		EBC5995C2DEF0CFF002A0CBC /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		EBC5995E2DEF0CFF002A0CBC /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		EBC599602DEF0CFF002A0CBC /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		EBC599622DEF0CFF002A0CBC /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		EBC599642DEF0CFF002A0CBC /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB6C6A9F2DBF8533002962B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EB5497F22DA9F02E009802DC /* Project object */;
 }

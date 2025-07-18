@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
+    "axios": "^1.10.0",
+    "querystring": "^0.2.1",
+    "stripe": "^18.1.0"
+  }
+}
