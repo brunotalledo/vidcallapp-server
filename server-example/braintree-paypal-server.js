@@ -1,6 +1,5 @@
 const express = require('express');
 const braintree = require('braintree');
-const paypal = require('@paypal/checkout-server-sdk');
 const cors = require('cors');
 require('dotenv').config();
 const axios = require('axios');
@@ -19,21 +18,6 @@ const gateway = new braintree.BraintreeGateway({
   publicKey: process.env.BRAINTREE_PUBLIC_KEY,
   privateKey: process.env.BRAINTREE_PRIVATE_KEY,
 });
-
-// PayPal configuration
-let environment;
-if (process.env.PAYPAL_ENVIRONMENT === 'production') {
-  environment = new paypal.core.LiveEnvironment(
-    process.env.PAYPAL_CLIENT_ID,
-    process.env.PAYPAL_CLIENT_SECRET
-  );
-} else {
-  environment = new paypal.core.SandboxEnvironment(
-    process.env.PAYPAL_CLIENT_ID,
-    process.env.PAYPAL_CLIENT_SECRET
-  );
-}
-const paypalClient = new paypal.core.PayPalHttpClient(environment);
 
 // ===== BRAINTREE ENDPOINTS =====
 
@@ -274,7 +258,7 @@ app.post('/api/paypal/payouts', async (req, res) => {
       return res.status(400).json({ error: 'Invalid amount' });
     }
 
-    const emailRegex = /^[^\s@]+@[^\\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(paypalEmail)) {
       return res.status(400).json({ error: 'Invalid PayPal email' });
     }
@@ -355,28 +339,47 @@ app.post('/api/paypal/payouts', async (req, res) => {
 app.get('/api/paypal/payouts/:payoutId/status', async (req, res) => {
   try {
     const { payoutId } = req.params;
-    
     if (!payoutId) {
       return res.status(400).json({ error: 'Payout ID is required' });
     }
 
-    const request = new paypal.payouts.PayoutsGetRequest(payoutId);
-    const response = await paypalClient.execute(request);
-    
-    if (response.result.batch_header) {
+    // 1. Get OAuth2 token from PayPal
+    const tokenResponse = await axios({
+      method: 'post',
+      url: `https://api-m.sandbox.paypal.com/v1/oauth2/token`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      auth: {
+        username: process.env.PAYPAL_CLIENT_ID,
+        password: process.env.PAYPAL_CLIENT_SECRET,
+      },
+      data: qs.stringify({ grant_type: 'client_credentials' }),
+    });
+    const accessToken = tokenResponse.data.access_token;
+
+    // 2. Get payout batch status
+    const statusResponse = await axios({
+      method: 'get',
+      url: `https://api-m.sandbox.paypal.com/v1/payments/payouts/${payoutId}`,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+
+    if (statusResponse.data && statusResponse.data.batch_header) {
       res.json({
         success: true,
-        status: response.result.batch_header.batch_status,
-        payoutId: response.result.batch_header.payout_batch_id,
-        timeCompleted: response.result.batch_header.time_completed
+        status: statusResponse.data.batch_header.batch_status,
+        payoutId: statusResponse.data.batch_header.payout_batch_id,
+        timeCompleted: statusResponse.data.batch_header.time_completed
       });
     } else {
       res.status(404).json({ error: 'Payout not found' });
     }
   } catch (error) {
-    console.error('Error checking payout status:', error);
-    
-    if (error.statusCode === 404) {
+    console.error('Error checking payout status:', error.response ? error.response.data : error.message);
+    if (error.response && error.response.status === 404) {
       res.status(404).json({ error: 'Payout not found' });
     } else {
       res.status(500).json({ error: 'Failed to check payout status' });
@@ -388,32 +391,51 @@ app.get('/api/paypal/payouts/:payoutId/status', async (req, res) => {
 app.get('/api/paypal/payouts/:payoutId', async (req, res) => {
   try {
     const { payoutId } = req.params;
-    
     if (!payoutId) {
       return res.status(400).json({ error: 'Payout ID is required' });
     }
 
-    const request = new paypal.payouts.PayoutsGetRequest(payoutId);
-    const response = await paypalClient.execute(request);
-    
-    if (response.result) {
+    // 1. Get OAuth2 token from PayPal
+    const tokenResponse = await axios({
+      method: 'post',
+      url: `https://api-m.sandbox.paypal.com/v1/oauth2/token`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      auth: {
+        username: process.env.PAYPAL_CLIENT_ID,
+        password: process.env.PAYPAL_CLIENT_SECRET,
+      },
+      data: qs.stringify({ grant_type: 'client_credentials' }),
+    });
+    const accessToken = tokenResponse.data.access_token;
+
+    // 2. Get payout batch details
+    const detailsResponse = await axios({
+      method: 'get',
+      url: `https://api-m.sandbox.paypal.com/v1/payments/payouts/${payoutId}`,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+
+    if (detailsResponse.data && detailsResponse.data.batch_header) {
       res.json({
         success: true,
         payout: {
-          id: response.result.batch_header.payout_batch_id,
-          status: response.result.batch_header.batch_status,
-          timeCreated: response.result.batch_header.time_created,
-          timeCompleted: response.result.batch_header.time_completed,
-          items: response.result.items || []
+          id: detailsResponse.data.batch_header.payout_batch_id,
+          status: detailsResponse.data.batch_header.batch_status,
+          timeCreated: detailsResponse.data.batch_header.time_created,
+          timeCompleted: detailsResponse.data.batch_header.time_completed,
+          items: detailsResponse.data.items || []
         }
       });
     } else {
       res.status(404).json({ error: 'Payout not found' });
     }
   } catch (error) {
-    console.error('Error getting payout details:', error);
-    
-    if (error.statusCode === 404) {
+    console.error('Error getting payout details:', error.response ? error.response.data : error.message);
+    if (error.response && error.response.status === 404) {
       res.status(404).json({ error: 'Payout not found' });
     } else {
       res.status(500).json({ error: 'Failed to get payout details' });
